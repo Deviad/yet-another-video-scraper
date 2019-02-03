@@ -7,11 +7,22 @@ The driving factor that pushed me to create this project is to show how easy it 
 Puppeteer is a very good alternative to other tools like Beautiful Soup and JSoup, which does its job very well.
 
 
+## Installation
+```
+yarn install
+yarn postinstall
+```
+
 ## Simple use case
 
 So far the only available options through the CLI are username, password and url.
 
+
 ```yarn start:tsnode --username <yourusername> --password <yourpassword> --url (http|https)://therestoftheurl```
+
+You can choose to run the application with the transpiled files located inside dist.
+
+```yarn start --username <yourusername> --password <yourpassword> --url (http|https)://therestoftheurl```
 
 
 In the future I will add the possibility to choose via the CLI the time to wait between one download and the other and also to choose the download quality.

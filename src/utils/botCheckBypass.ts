@@ -5,8 +5,6 @@ const botCheckBypass: (page: Page) => Promise<void> = async (page: Page) => {
     Object.defineProperty(navigator, 'webdriver', {
       get: () => false
     });
-  });
-  await page.evaluateOnNewDocument(() => {
     // We can mock this in as much depth as we need for the test.
     window.navigator.chrome = {
       app: {
@@ -53,30 +51,28 @@ const botCheckBypass: (page: Page) => Promise<void> = async (page: Page) => {
         }
       }
     };
-  });
-  // Pass the Permissions Test.
-  await page.evaluateOnNewDocument(() => {
-    const originalQuery = window.navigator.permissions.query;
-    return (window.navigator.permissions.query = (parameters: any) =>
-      parameters.name === 'notifications'
-        ? Promise.resolve({ state: Notification.permission })
-        : originalQuery(parameters));
-  });
-  // Pass the Plugins Length Test.
-  await page.evaluateOnNewDocument(() => {
+
+    // Pass the Languages Test.
+    // Overwrite the `plugins` property to use a custom getter.
+    Object.defineProperty(navigator, 'languages', {
+      get: () => ['en-US', 'en']
+    });
+
+    // Pass the Plugins Length Test.
     // Overwrite the `plugins` property to use a custom getter.
     Object.defineProperty(navigator, 'plugins', {
       // This just needs to have `length > 0` for the current test,
       // but we could mock the plugins too if necessary.
       get: () => [1, 2, 3, 4, 5]
     });
-  });
-  // Pass the Languages Test.
-  await page.evaluateOnNewDocument(() => {
-    // Overwrite the `plugins` property to use a custom getter.
-    Object.defineProperty(navigator, 'languages', {
-      get: () => ['en-US', 'en']
-    });
+
+    // Pass the Permissions Test.
+    const originalQuery = window.navigator.permissions.query;
+    return (window.navigator.permissions.query = (parameters: any) =>
+      parameters.name === 'notifications'
+        ? Promise.resolve({ state: Notification.permission })
+        : originalQuery(parameters));
+
   });
 };
 

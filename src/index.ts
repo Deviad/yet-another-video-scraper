@@ -1,4 +1,3 @@
-require('module-alias/register');
 import { promisify } from 'util';
 import { exec } from 'child_process';
 import * as argv from 'minimist';
@@ -20,7 +19,8 @@ async function main() {
     container.getInstance().addService(new FolderFactory('download'));
 
     const userAgent = Constants.General.USER_AGENT;
-
+    /*We add a new instance of Browser and add it to the service container 
+    */
     container.getInstance().addService(
       await puppeteer.launch({
         args: [

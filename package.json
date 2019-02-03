@@ -4,6 +4,7 @@
   "description": "video scraper based on node and Typescript",
   "main": "./dist/src/index.js",
   "scripts": {
+    "postinstall": "link-module-alias",
     "watch": "cross-env NODE_ENV=development nodemon -e ts,twig,scss -x ts-node --no-cache ./src/index.ts",
     "watch:debug": "cross-env NODE_ENV=development nodemon -e ts -x node -r ts-node/register --inspect-brk=localhost:9222 ./src/index.ts",
     "start:dev": "ts-node --no-cache ./src/index.ts",
@@ -25,6 +26,7 @@
     "@types/puppeteer": "^1.11.1",
     "@types/request": "^2.48.1",
     "cross-env": "^5.2.0",
+    "link-module-alias": "^1.1.6",
     "node-yaml-config": "^0.0.4",
     "prettier": "^1.16.3",
     "rimraf": "^2.6.3",
@@ -37,7 +39,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.11",
-    "module-alias": "^2.1.0",
     "node-yaml-config": "^0.0.4",
     "nodemon": "^1.18.9",
     "progress": "^2.0.3",
