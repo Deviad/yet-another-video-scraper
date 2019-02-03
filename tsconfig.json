@@ -1,0 +1,30 @@
+{
+   "compilerOptions": {
+      "lib": [
+         "esnext",
+         "dom"
+      ],
+      "baseUrl": "src",
+      "target": "es2017",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./dist",
+      "declaration": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "importHelpers": true,
+//      "noEmitHelpers": false,
+      "noImplicitAny": true,
+      "paths": {
+         "tslib": [
+            "./node_modules/tslib/tslib.d.ts"
+         ],
+         "@utils": ["utils/index"],
+         "@utils/*": ["utils/*"],
+         "@typings": ["../typings/index"],
+         "@typings/*": ["../typings/"]
+      }
+   },
+   "exclude": ["node_modules", "**/__tests__/*", "dist"]
+}

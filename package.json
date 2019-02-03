@@ -1,0 +1,67 @@
+{
+  "name": "yet-another-video-scraper",
+  "version": "0.0.1",
+  "description": "video scraper based on node and Typescript",
+  "main": "./dist/src/index.js",
+  "scripts": {
+    "watch": "cross-env NODE_ENV=development nodemon -e ts,twig,scss -x ts-node --no-cache ./src/index.ts",
+    "watch:debug": "cross-env NODE_ENV=development nodemon -e ts -x node -r ts-node/register --inspect-brk=localhost:9222 ./src/index.ts",
+    "start:dev": "ts-node --no-cache ./src/index.ts",
+    "start:tsnode": "cross-env ts-node src/index.ts",
+    "start": "cross-env rimraf -rf ./dist && cross-env tsc && cross-env node dist/src/index.js",
+    "start:staging": "cross-env NODE_ENV=staging ts-node ./src/index.ts",
+    "tslint-check": "cross-env tslint-config-prettier-check ./tslint.json",
+    "test": "cross-env echo \"Error: no test specified\" && exit 1",
+    "prettify": "cross-env prettier --write '{src,typings}/**/*.ts'"
+  },
+  "_moduleAliases": {
+    "@utils": "dist/src/utils",
+    "@typings": "dist/typings"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.119",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^10.12.18",
+    "@types/puppeteer": "^1.11.1",
+    "@types/request": "^2.48.1",
+    "cross-env": "^5.2.0",
+    "node-yaml-config": "^0.0.4",
+    "prettier": "^1.16.3",
+    "rimraf": "^2.6.3",
+    "ts-helpers": "^1.1.2",
+    "ts-node": "^7.0.1",
+    "tslib": "^1.9.3",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "module-alias": "^2.1.0",
+    "node-yaml-config": "^0.0.4",
+    "nodemon": "^1.18.9",
+    "progress": "^2.0.3",
+    "puppeteer": "^1.11.0",
+    "reflect-metadata": "^0.1.12",
+    "request": "^2.88.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "the repositories url"
+  },
+  "author": "Davide Pugliese <deviad@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "scraper",
+    "udemy"
+  ],
+  "homepage": "",
+  "bugs": {
+    "url": ""
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "types": "dist/typings/index.d.ts"
+}
