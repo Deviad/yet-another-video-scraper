@@ -27,20 +27,20 @@ class CourseHunterScrapingService implements IScrapingService {
     this.vMapFactory = vMapFactory;
   }
 
-  get url() {
+  get url(): String {
     // console.log("the url is ", this._url);
     return this._url;
   }
 
-  get username() {
+  get username(): String {
     return this._username;
   }
 
-  get password() {
+  get password(): String {
     return this._password;
   }
 
-  async login() {
+  async login(): Promise<IScrapingService> {
     if (!this.isLogged) {
       await this.page.goto('https://coursehunters.net/admin/#/login');
       await this.page.type('[formcontrolname="e_mail"]', `${this.username}`);
@@ -55,7 +55,7 @@ class CourseHunterScrapingService implements IScrapingService {
   }
 
   downloader: Downloader = (url, title, cb) => {
-    const sanitizedTitle = title[0].replace(/[.\-\\/+()*[\]={}!@#$%^&<>,:;"'| ]/g, '_');
+    const sanitizedTitle = title.replace(/[.\-\\/+()*[\]={}!@#$%^&<>,:;"'| ]/g, '_');
     return new Promise((resolve, reject) => {
       const extension = url
         .split('/')
@@ -108,8 +108,9 @@ class CourseHunterScrapingService implements IScrapingService {
         const url = videoMap[key]['url'];
         const title =
           (videoMap[key]['title'] as string).indexOf('Урок') > -1
-            ? (videoMap[key]['title'] as string).trim().split('Урок')[0]
+            ? (videoMap[key]['title'] as string).trim().split('Урок')[1].trim()
             : videoMap[key]['title'];
+
         yield () => downloader(url, title, (message: string) => console.log(message));
       }
     };
@@ -136,7 +137,7 @@ class CourseHunterScrapingService implements IScrapingService {
 
       this.videoMap = await new CourseHunterVideoMapFactory(this.page).getVideoMap();
 
-      console.log('videoMap', JSON.stringify(this.videoMap));
+      // console.log('videoMap', JSON.stringify(this.videoMap));
 
       const dl = this.downloadGenerator(this.videoMap, this.downloader)();
       for await (let key of Object.keys(this.videoMap)) {
