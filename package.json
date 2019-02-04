@@ -7,6 +7,7 @@
     "postinstall": "link-module-alias",
     "watch": "cross-env NODE_ENV=development nodemon -e ts,twig,scss -x ts-node --no-cache ./src/index.ts",
     "watch:debug": "cross-env NODE_ENV=development nodemon -e ts -x node -r ts-node/register --inspect-brk=localhost:9222 ./src/index.ts",
+    "build": "cross-env rimraf -rf ./dist && cross-env tsc",
     "start:dev": "ts-node --no-cache ./src/index.ts",
     "start:tsnode": "cross-env ts-node src/index.ts",
     "start": "cross-env rimraf -rf ./dist && cross-env tsc && cross-env node dist/src/index.js",
@@ -43,6 +44,7 @@
     "nodemon": "^1.18.9",
     "progress": "^2.0.3",
     "puppeteer": "^1.11.0",
+    "puppeteer-firefox": "^0.4.2",
     "reflect-metadata": "^0.1.12",
     "request": "^2.88.0"
   },

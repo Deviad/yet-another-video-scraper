@@ -4,16 +4,15 @@
 // }
 //     interface Document { }
 // }
-declare global {
-  interface Window {
+  export declare interface ExtendedWindow {
     writeABString: any;
     arrayBufferToString: any;
-  }
-  interface Navigator {
     chrome: any;
+    navigator: any
+  }
+  export interface ExtendedNavigator {
     permissions: any;
   }
-}
 
 // declare interface ScrapingService {
 //     new(page: Page): any;

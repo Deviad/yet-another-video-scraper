@@ -1,0 +1,30 @@
+{
+  "mimeTypes":{
+    "length":0
+  },
+  "plugins":{
+    "length":0
+  },
+  "doNotTrack":"unspecified",
+  "maxTouchPoints":0,
+  "oscpu":"Intel Mac OS X 10.14",
+  "vendor":"",
+  "vendorSub":"",
+  "productSub":"20100101",
+  "cookieEnabled":true,
+  "buildID":"20181001000000",
+  "webdriver":false,
+  "hardwareConcurrency":8,
+  "appCodeName":"Mozilla",
+  "appName":"Netscape",
+  "appVersion":"5.0 (Macintosh)",
+  "platform":"MacIntel",
+  "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:65.0) Gecko/20100101 Firefox/65.0",
+  "product":"Gecko",
+  "language":"en-US",
+  "languages":{
+    "0":"en-US",
+    "1":"en"
+  },
+  "onLine":true
+}

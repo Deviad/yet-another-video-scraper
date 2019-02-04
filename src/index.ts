@@ -3,8 +3,10 @@ import { exec } from 'child_process';
 import * as argv from 'minimist';
 import ParamsFactory from './ParamsFactory';
 import CourseScraper from './CourseScraper';
+// @ts-ignore
 import * as puppeteer from 'puppeteer';
 import container from './ServiceContainer';
+// @ts-ignore
 import { Browser } from 'puppeteer';
 import Constants from './Constants';
 import { FolderFactory } from './utils';
@@ -29,6 +31,7 @@ async function main() {
           `--user-agent=${userAgent}`,
           '--no-sandbox',
           '--disable-setuid-sandbox',
+          '--disable-infobars',
           /*
           Simulate real browser
          */

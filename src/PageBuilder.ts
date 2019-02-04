@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Browser, Page } from 'puppeteer';
 class PageBuilder {
   private browser: Browser;

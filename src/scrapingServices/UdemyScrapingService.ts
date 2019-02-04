@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Cookie, Page, Response } from 'puppeteer';
 import { isEmpty, flatMap } from 'lodash';
 import * as fs from 'fs';
@@ -20,7 +21,7 @@ class UdemyScrapingService implements IScrapingService {
   private readonly page: Page;
   private videoMap: Object;
   private accessToken: String;
-  private courseId: String;
+  private _courseId: String;
   private vMapFactory: UdemyVideoMapFactory;
   private courseMaterial: IIndexable;
   private readonly fFactory: FolderFactory = container.getInstance().getService(FolderFactory.name);
@@ -36,6 +37,14 @@ class UdemyScrapingService implements IScrapingService {
     this.courseMaterial = {};
   }
 
+  get courseId() {
+    return this._courseId;
+  }
+
+  set courseId(id: String) {
+    this._courseId = id;
+  }
+
   get url() {
     console.log('the url is ', this._url);
     return this._url;
@@ -48,7 +57,6 @@ class UdemyScrapingService implements IScrapingService {
   get password() {
     return this._password;
   }
-
   async login() {
     await this.page.goto('https://www.udemy.com');
     console.log('<<>>> figaaaaa <<>>');
@@ -167,35 +175,41 @@ class UdemyScrapingService implements IScrapingService {
     };
   }
 
-  responseHandler = (resolve: Function) => (respEvent: Response) => {
+  courseMaterialHandler = (resolve: Function, reject: Function) => (respEvent: Response) => {
     return ((respEvent, resolve: Function) => {
       try {
-        if (
-          respEvent.url().match('https://www.udemy.com/api-2.0/courses/[0-9]+/cached-subscriber-curriculum-items/(.)+')
-        ) {
-          this.courseId = respEvent
-            .url()
-            .match('^((.*?)(\\/courses\\/[0-9]+\\/))*(.*)')[3]
-            .split('/')[2];
+        if (respEvent.url().match('(.*?)course-landing-components\\/([0-9]+)\\/(.*)')) {
+          this.courseId = respEvent.url().match('(.*?)course-landing-components\\/([0-9]+)\\/(.*)')[2];
           console.log('COURSE ID', this.courseId);
-          respEvent
-            .json()
-            .then(res => {
-              resolve(res.results);
-            })
-            .catch(err => {
-              throw err;
-            });
+          request(
+            {
+              uri: `https://www.udemy.com/api-2.0/courses/${
+                this.courseId
+              }/cached-subscriber-curriculum-items/?page_size=1400&fields[lecture]=@min,object_index,asset,supplementary_assets,sort_order,is_published,is_free&fields[quiz]=@min,object_index,title,sort_order,is_published&fields[practice]=@min,object_index,title,sort_order,is_published&fields[chapter]=@min,description,object_index,title,sort_order,is_published&fields[asset]=@min,title,filename,asset_type,external_url,length,status`,
+              method: 'GET',
+              headers: {
+                authorization: `Bearer ${this.accessToken}`
+              }
+            },
+            (error, response, body) => {
+              try {
+                resolve(JSON.parse(body).results);
+              } catch (err) {
+                reject(err);
+              }
+            }
+          );
         }
       } catch (err) {
         throw err;
       }
     })(respEvent, resolve);
   };
+
   getCourseMaterial = () => {
     return new Promise((resolve, reject) => {
       try {
-        this.page.on('response', this.responseHandler(resolve));
+        this.page.on('response', this.courseMaterialHandler(resolve, reject));
       } catch (err) {
         reject(err);
       }
@@ -217,14 +231,12 @@ class UdemyScrapingService implements IScrapingService {
       if (!isEmpty(await this.page.evaluate(() => document.querySelector('[data-purpose="buy-this-course-button"]')))) {
         await this.page.click('[data-purpose="buy-this-course-button"]');
       }
-
-      this.courseMaterial = (await this.getCourseMaterial()) as IIndexable;
-      // await sleep(0, () => console.log("figaaa", ( this.courseMaterial as IIndexable)));
-      await this.page.waitForSelector('[data-purpose="curriculum-section-container"]');
       this.accessToken = (await this.page.cookies())
         .filter((x: Cookie) => x.name === 'access_token')
-        .map(x => x.value)[0];
-
+        .map((x: IIndexable) => x.value)[0];
+      this.courseMaterial = (await this.getCourseMaterial()) as IIndexable;
+      // await sleep(0, () => console.log("figaaa", ( this.courseMaterial as IIndexable)));
+      await this.page.waitForSelector('[data-purpose="curriculum-development"]');
       await this.page.screenshot({ path: screenshot2 });
       console.log('See screenshot2: ' + screenshot2);
       // console.log(await this.page.evaluate(() => document.title));

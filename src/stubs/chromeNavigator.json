@@ -1,0 +1,107 @@
+{
+  "vendorSub":"",
+  "productSub":"20030107",
+  "vendor":"Google Inc.",
+  "maxTouchPoints":0,
+  "hardwareConcurrency":8,
+  "cookieEnabled":true,
+  "appCodeName":"Mozilla",
+  "appName":"Netscape",
+  "appVersion":"5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36",
+  "platform":"MacIntel",
+  "product":"Gecko",
+  "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36",
+  "language":"en-US",
+  "languages":{
+    "0":"en-US",
+    "1":"en",
+    "2":"ro",
+    "3":"it"
+  },
+  "onLine":true,
+  "connection":{
+    "effectiveType":"4g",
+    "rtt":100,
+    "downlink":5.6,
+    "saveData":false
+  },
+  "plugins":{
+    "0":{
+      "0":{
+        "type":"application/x-google-chrome-pdf",
+        "suffixes":"pdf",
+        "description":"Portable Document Format"
+      },
+      "name":"Chrome PDF Plugin",
+      "filename":"internal-pdf-viewer",
+      "description":"Portable Document Format",
+      "length":1
+    },
+    "1":{
+      "0":{
+        "type":"application/pdf",
+        "suffixes":"pdf",
+        "description":""
+      },
+      "name":"Chrome PDF Viewer",
+      "filename":"mhjfbmdgcfjbbpaeojofohoefgiehjai",
+      "description":"",
+      "length":1
+    },
+    "2":{
+      "0":{
+        "type":"application/x-nacl",
+        "suffixes":"",
+        "description":"Native Client Executable"
+      },
+      "1":{
+        "type":"application/x-pnacl",
+        "suffixes":"",
+        "description":"Portable Native Client Executable"
+      },
+      "2":{
+        "type":"text/html",
+        "suffixes":"",
+        "description":""
+      },
+      "name":"Native Client",
+      "filename":"internal-nacl-plugin",
+      "description":"",
+      "length":3
+    },
+    "length":3
+  },
+  "mimeTypes":{
+    "0":{
+      "type":"application/pdf",
+      "suffixes":"pdf",
+      "description":""
+    },
+    "1":{
+      "type":"application/x-google-chrome-pdf",
+      "suffixes":"pdf",
+      "description":"Portable Document Format"
+    },
+    "2":{
+      "type":"application/x-nacl",
+      "suffixes":"",
+      "description":"Native Client Executable"
+    },
+    "3":{
+      "type":"application/x-pnacl",
+      "suffixes":"",
+      "description":"Portable Native Client Executable"
+    },
+    "4":{
+      "type":"text/html",
+      "suffixes":"",
+      "description":""
+    },
+    "length":5
+  },
+  "userActivation":{
+    "hasBeenActive":true,
+    "isActive":true
+  },
+  "deviceMemory":8
+}

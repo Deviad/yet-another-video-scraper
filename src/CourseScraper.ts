@@ -1,4 +1,5 @@
 import ScrapingServiceDirector from './scrapingServices/ScrapingServiceDirector';
+// @ts-ignore
 import { Browser } from 'puppeteer';
 import PageBuilder from './PageBuilder';
 import { botCheckBypass } from './utils';

@@ -1,4 +1,5 @@
 import ConstantsMap from '../Constants';
+// @ts-ignore
 import { Page } from 'puppeteer';
 import { IIndexable, StringArrayPromise, TitleArrayFactory, UrlArrayFactory } from '@typings';
 
